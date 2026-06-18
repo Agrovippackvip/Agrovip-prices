@@ -3,331 +3,495 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Actualizar Precios — AgroVIP</title>
+  <title>Actualizar Precios FOB — AgroVIP</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    :root{--green:#064E3B;--gold:#F59E0B;--cream:#F8FAF4;--dark:#1F2937;--gray:#6B7280;--red:#DC2626;}
+    :root{--green:#064E3B;--green-mid:#065F46;--green-light:#D1FAE5;
+          --gold:#F59E0B;--gold-light:#FEF3C7;--cream:#F8FAF4;
+          --dark:#1F2937;--gray:#6B7280;--red:#DC2626;--white:#fff;}
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;}
 
     /* LOGIN */
     .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;
       background:linear-gradient(135deg,var(--green) 0%,#022C22 100%);}
-    .login-box{background:#fff;border-radius:20px;padding:48px;width:100%;max-width:400px;text-align:center;
-      box-shadow:0 20px 60px rgba(0,0,0,0.3);}
-    .login-box h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--green);margin-bottom:8px;}
-    .login-box p{color:var(--gray);font-size:14px;margin-bottom:32px;}
+    .login-box{background:#fff;border-radius:20px;padding:48px;width:100%;max-width:400px;
+      text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+    .login-logo{font-size:48px;margin-bottom:12px;}
+    .login-box h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;
+      color:var(--green);margin-bottom:6px;}
+    .login-box p{color:var(--gray);font-size:14px;margin-bottom:28px;}
     .login-box input{width:100%;padding:14px 18px;border:2px solid #E5E7EB;border-radius:10px;
-      font-size:16px;margin-bottom:16px;outline:none;transition:border .2s;font-family:'Lato',sans-serif;}
+      font-size:16px;margin-bottom:14px;outline:none;transition:border .2s;font-family:'Lato',sans-serif;}
     .login-box input:focus{border-color:var(--green);}
-    .login-box button{width:100%;padding:14px;background:var(--green);color:#fff;border:none;
+    .login-btn{width:100%;padding:14px;background:var(--green);color:#fff;border:none;
       border-radius:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;
       cursor:pointer;transition:background .2s;}
-    .login-box button:hover{background:#065F46;}
-    .login-error{color:var(--red);font-size:13px;margin-top:8px;display:none;}
+    .login-btn:hover{background:var(--green-mid);}
+    .login-error{color:var(--red);font-size:13px;margin-top:10px;display:none;}
 
-    /* MAIN APP */
+    /* APP */
     .app{display:none;}
-    nav{background:var(--green);height:64px;display:flex;align-items:center;padding:0 32px;
-      box-shadow:0 2px 16px rgba(0,0,0,.2);}
-    .nav-brand{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-right:auto;}
+    nav{background:var(--green);height:64px;display:flex;align-items:center;
+      padding:0 32px;box-shadow:0 2px 16px rgba(0,0,0,.2);}
+    .nav-brand{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;
+      color:#fff;margin-right:auto;}
     .nav-brand span{color:var(--gold);}
-    .nav-user{color:#A7F3D0;font-size:13px;margin-right:16px;}
-    .nav-logout{background:rgba(255,255,255,.1);color:#fff;border:none;padding:7px 16px;
-      border-radius:8px;cursor:pointer;font-size:13px;transition:background .2s;}
-    .nav-logout:hover{background:rgba(255,255,255,.2);}
-    .nav-back{color:#D1FAE5;text-decoration:none;font-size:13px;margin-right:16px;
-      display:flex;align-items:center;gap:6px;}
-    .nav-back:hover{color:#fff;}
+    .nav-right{display:flex;align-items:center;gap:12px;}
+    .nav-user{color:#A7F3D0;font-size:13px;}
+    .nav-btn{background:rgba(255,255,255,.12);color:#fff;border:none;
+      padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;
+      text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+      transition:background .2s;}
+    .nav-btn:hover{background:rgba(255,255,255,.22);}
 
-    .container{max-width:900px;margin:0 auto;padding:40px 24px;}
+    .container{max-width:960px;margin:0 auto;padding:36px 24px 80px;}
 
-    /* STATUS BANNER */
-    .status-banner{border-radius:12px;padding:16px 20px;margin-bottom:32px;
-      display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;}
-    .status-ok{background:#DCFCE7;color:#166534;border:1px solid #BBF7D0;}
-    .status-warn{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;}
-    .status-danger{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;}
+    /* STATUS */
+    .status-banner{border-radius:12px;padding:14px 20px;margin-bottom:28px;
+      display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;}
+    .s-ok{background:#DCFCE7;color:#166534;border:1px solid #BBF7D0;}
+    .s-warn{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;}
+    .s-danger{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;}
 
     /* WEEK HEADER */
-    .week-header{background:#fff;border-radius:16px;padding:28px;margin-bottom:24px;
-      box-shadow:0 2px 12px rgba(6,78,59,.08);display:flex;gap:20px;align-items:flex-end;}
-    .week-header .field{flex:1;}
-    .week-header label{display:block;font-size:12px;font-weight:700;color:var(--green);
-      text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-    .week-header input,.week-header textarea{width:100%;padding:10px 14px;
-      border:2px solid #E5E7EB;border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;
-      outline:none;transition:border .2s;}
-    .week-header input:focus,.week-header textarea:focus{border-color:var(--green);}
-
-    /* PRODUCT ROWS */
-    .products-title{font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;
-      color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-    .product-row{background:#fff;border-radius:14px;padding:24px;margin-bottom:14px;
-      box-shadow:0 2px 12px rgba(6,78,59,.07);border-left:5px solid;}
-    .product-row-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
-    .product-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
-    .product-row-header h3{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--dark);}
-    .product-row-header .en{font-size:12px;color:var(--gray);margin-left:auto;}
-    .row-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+    .card{background:#fff;border-radius:16px;padding:28px;margin-bottom:20px;
+      box-shadow:0 2px 12px rgba(6,78,59,.08);}
+    .card-title{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;
+      color:var(--green);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+    .fields-row{display:grid;gap:16px;}
+    .fields-row.col2{grid-template-columns:1fr 2fr;}
+    .fields-row.col3{grid-template-columns:1fr 2fr 2fr;}
     .field label{display:block;font-size:11px;font-weight:700;color:var(--green);
       text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
-    .field input,.field select{width:100%;padding:9px 12px;border:2px solid #E5E7EB;
-      border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;
-      outline:none;transition:border .2s;background:#fff;}
-    .field input:focus,.field select:focus{border-color:var(--green);}
-    .field .note{font-size:11px;color:var(--gray);margin-top:4px;}
+    .field input,.field select,.field textarea{width:100%;padding:10px 13px;
+      border:2px solid #E5E7EB;border-radius:8px;font-size:14px;
+      font-family:'Lato',sans-serif;outline:none;transition:border .2s;background:#fff;}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);}
 
-    /* SAVE BUTTON */
-    .save-wrap{text-align:center;margin-top:36px;padding-bottom:60px;}
+    /* PRODUCT CALCULATOR CARD */
+    .fruit-card{background:#fff;border-radius:16px;margin-bottom:16px;
+      box-shadow:0 2px 12px rgba(6,78,59,.07);overflow:hidden;border-left:5px solid;}
+    .fruit-header{display:flex;align-items:center;gap:12px;padding:18px 24px;
+      cursor:pointer;user-select:none;}
+    .fruit-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .fruit-header h3{font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;
+      color:var(--dark);flex:1;}
+    .fruit-header .kg-tag{font-size:12px;color:var(--gray);background:#F3F4F6;
+      padding:3px 10px;border-radius:50px;}
+    .fob-result-mini{font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;
+      color:var(--green);margin-left:auto;margin-right:12px;}
+    .fruit-toggle{color:var(--gray);transition:transform .2s;}
+    .fruit-body{display:none;padding:0 24px 24px;border-top:1px solid #F3F4F6;}
+    .fruit-body.open{display:block;}
+
+    /* COSTS GRID */
+    .costs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0;}
+    .cost-item label{display:block;font-size:10px;font-weight:700;color:var(--gray);
+      text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .cost-item .input-prefix{display:flex;align-items:center;border:2px solid #E5E7EB;
+      border-radius:8px;overflow:hidden;transition:border .2s;}
+    .cost-item .input-prefix:focus-within{border-color:var(--green);}
+    .cost-item .prefix{background:#F9FAFB;padding:9px 10px;font-size:13px;
+      color:var(--gray);border-right:1px solid #E5E7EB;white-space:nowrap;}
+    .cost-item input{border:none;outline:none;padding:9px 12px;font-size:14px;
+      font-family:'Lato',sans-serif;width:100%;background:#fff;}
+    .cost-item .fixed{background:#F9FAFB;color:var(--gray);font-size:13px;
+      padding:10px 13px;border:2px solid #E5E7EB;border-radius:8px;}
+
+    /* FOB RESULT BOX */
+    .fob-box{background:linear-gradient(135deg,var(--green) 0%,#065F46 100%);
+      border-radius:12px;padding:20px 24px;margin-top:16px;
+      display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:center;}
+    .fob-col{text-align:center;}
+    .fob-col .lbl{font-size:10px;font-weight:700;color:#A7F3D0;
+      text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .fob-col .val{font-family:'Poppins',sans-serif;font-size:22px;font-weight:800;color:#fff;}
+    .fob-col .val.gold{color:var(--gold);}
+    .fob-col .sub{font-size:11px;color:#6EE7B7;margin-top:2px;}
+    .cost-breakdown{margin-top:12px;background:rgba(255,255,255,.08);
+      border-radius:8px;padding:12px 16px;}
+    .cost-breakdown .row{display:flex;justify-content:space-between;
+      font-size:12px;color:#A7F3D0;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+    .cost-breakdown .row:last-child{border:none;font-weight:700;color:#fff;margin-top:4px;}
+    .cost-breakdown .row .lbl{color:#6EE7B7;}
+
+    /* SAVE */
+    .save-wrap{text-align:center;margin-top:32px;}
     .btn-save{background:var(--green);color:#fff;border:none;padding:18px 56px;
       border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;
       cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:10px;
       box-shadow:0 4px 20px rgba(6,78,59,.3);}
-    .btn-save:hover{background:#065F46;transform:translateY(-2px);box-shadow:0 8px 28px rgba(6,78,59,.4);}
+    .btn-save:hover{background:var(--green-mid);transform:translateY(-2px);}
     .btn-save:disabled{background:#9CA3AF;cursor:not-allowed;transform:none;box-shadow:none;}
+    .save-note{margin-top:12px;color:var(--gray);font-size:13px;}
 
     /* TOAST */
     .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
-      background:var(--green);color:#fff;padding:14px 28px;border-radius:50px;
-      font-weight:700;font-size:15px;box-shadow:0 8px 32px rgba(0,0,0,.25);
-      display:none;z-index:999;align-items:center;gap:10px;}
-    .toast.error{background:var(--red);}
+      padding:14px 28px;border-radius:50px;font-weight:700;font-size:15px;
+      box-shadow:0 8px 32px rgba(0,0,0,.25);display:none;z-index:999;
+      align-items:center;gap:10px;white-space:nowrap;}
+    .toast.ok{background:var(--green);color:#fff;}
+    .toast.err{background:var(--red);color:#fff;}
 
     @media(max-width:768px){
-      .row-fields{grid-template-columns:1fr 1fr;}
-      .week-header{flex-direction:column;}
-      .container{padding:24px 16px;}
+      .costs-grid{grid-template-columns:1fr 1fr;}
+      .fob-box{grid-template-columns:1fr;}
+      .fields-row.col2,.fields-row.col3{grid-template-columns:1fr;}
+      .container{padding:20px 14px 60px;}
     }
   </style>
 </head>
 <body>
 
-<!-- ── LOGIN ─────────────────────────────────────────────── -->
+<!-- LOGIN -->
 <div class="login-wrap" id="loginWrap">
   <div class="login-box">
-    <div style="font-size:48px;margin-bottom:16px;">🌿</div>
+    <div class="login-logo">🌿</div>
     <h2>AGROVIP</h2>
-    <p>Panel de actualización de precios semanales</p>
-    <input type="password" id="loginPass" placeholder="Ingresa tu clave" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()"><i class="fa-solid fa-lock-open"></i> Ingresar</button>
+    <p>Panel de precios FOB semanales</p>
+    <input type="password" id="loginPass" placeholder="Ingresa tu clave"
+      onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">
+      <i class="fa-solid fa-lock-open"></i> Ingresar
+    </button>
     <div class="login-error" id="loginError">Clave incorrecta. Intenta de nuevo.</div>
   </div>
 </div>
 
-<!-- ── APP ───────────────────────────────────────────────── -->
+<!-- APP -->
 <div class="app" id="appWrap">
   <nav>
-    <span class="nav-brand">AGRO<span>VIP</span> &nbsp;·&nbsp; <span style="font-size:14px;font-weight:400;color:#A7F3D0;">Panel de Precios</span></span>
-    <a href="./precios.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Ver sitio público</a>
-    <span class="nav-user" id="navUser"></span>
-    <button class="nav-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+    <span class="nav-brand">AGRO<span>VIP</span> &nbsp;·&nbsp;
+      <span style="font-size:13px;font-weight:400;color:#A7F3D0;">Calculador FOB</span></span>
+    <div class="nav-right">
+      <a href="./precios.html" class="nav-btn" target="_blank">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver sitio
+      </a>
+      <span class="nav-user" id="navUser"></span>
+      <button class="nav-btn" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> Salir
+      </button>
+    </div>
   </nav>
 
   <div class="container">
-    <div id="statusBanner" class="status-banner status-ok">
+
+    <div id="statusBanner" class="status-banner s-ok">
       <i class="fa-solid fa-circle-check"></i>
-      <span id="statusText">Cargando estado...</span>
+      <span id="statusText">Cargando...</span>
     </div>
 
-    <!-- WEEK INFO -->
-    <div class="week-header">
-      <div class="field">
-        <label>Número de Semana</label>
-        <input type="number" id="fSemana" placeholder="Ej: 26" min="1" max="53">
-      </div>
-      <div class="field" style="flex:2;">
-        <label>Descripción del período</label>
-        <input type="text" id="fFecha" placeholder="Ej: Semana del 23 al 29 de Junio, 2025">
-      </div>
-      <div class="field" style="flex:2;">
-        <label>Nota general (aparece en la tabla)</label>
-        <input type="text" id="fNota" placeholder="Precios FOB Guayaquil. Sujetos a volumen y temporada.">
+    <!-- WEEK HEADER -->
+    <div class="card">
+      <div class="card-title"><i class="fa-solid fa-calendar-week"></i> Período Semanal</div>
+      <div class="fields-row col3">
+        <div class="field">
+          <label>Semana #</label>
+          <input type="number" id="fSemana" placeholder="26" min="1" max="53">
+        </div>
+        <div class="field">
+          <label>Período</label>
+          <input type="text" id="fFecha" placeholder="Semana del 23 al 29 de Junio, 2025">
+        </div>
+        <div class="field">
+          <label>Nota general para clientes</label>
+          <input type="text" id="fNota"
+            value="Precios FOB Guayaquil. Pueden variar según volumen de pedido. CIF cotizado a solicitud.">
+        </div>
       </div>
     </div>
 
-    <!-- PRODUCTS -->
-    <div class="products-title"><i class="fa-solid fa-leaf"></i> Precios por Producto</div>
-    <div id="productRows"></div>
+    <!-- FRUIT CARDS -->
+    <div class="card-title" style="padding:0 0 12px;">
+      <i class="fa-solid fa-calculator" style="color:var(--green)"></i>
+      Calculador FOB por Fruta — Margen fijo 18%
+    </div>
+
+    <div id="fruitCards"></div>
 
     <div class="save-wrap">
-      <button class="btn-save" id="btnSave" onclick="savePrecios()">
+      <button class="btn-save" id="btnSave" onclick="saveAll()">
         <i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios
       </button>
-      <p style="margin-top:16px;color:var(--gray);font-size:13px;">
-        Los precios se publican inmediatamente en el sitio público.
-      </p>
+      <p class="save-note">Los precios se publican inmediatamente en el sitio público.</p>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
 <script>
 // ── CONFIG ────────────────────────────────────────────────
-const SUPABASE_URL = 'https://asexyvzorhdddsgjqczh.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZXh5dnpvcmhkZGRzZ2pxY3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NjU2NTcsImV4cCI6MjA2MDM0MTY1N30.wABmVMQzKuSvoAfyMHkDEzpqmwehiSTTPKS4_z7SHac';
-const EMAILJS_SERVICE  = 'service_lptgrd5';
-const EMAILJS_TEMPLATE = 'template_2z6dond';
-const EMAILJS_KEY      = 'ZvrnAlzPIyQhSUzWj';
+const SB_URL  = 'https://asexyvzorhdddsgjqczh.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZXh5dnpvcmhkZGRzZ2pxY3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NjU2NTcsImV4cCI6MjA2MDM0MTY1N30.wABmVMQzKuSvoAfyMHkDEzpqmwehiSTTPKS4_z7SHac';
+const EJS_SVC = 'service_lptgrd5';
+const EJS_TPL = 'template_2z6dond';
+const EJS_KEY = 'ZvrnAlzPIyQhSUzWj';
+const MARGIN  = 0.18;
 
-// Claves de acceso
-const USERS = {
-  'agrovip2025':  'Daniel Polit',
-  'lili2025':     'Lilibeth'
-};
-
-// Emails para alertas
+const USERS = { 'agrovip2025':'Daniel Polit', 'lili2025':'Lilibeth' };
 const ALERT_EMAILS = [
-  { name: 'Daniel',    email: 'ventas@agrovipsas.com' },
-  { name: 'Lilibeth',  email: 'lilibeth@agrovipsa.com' },
+  { name:'Daniel',   email:'ventas@agrovipsas.com' },
+  { name:'Lilibeth', email:'lilibeth@agrovipsa.com' },
 ];
 
-const PRODUCTS = [
-  { id:'pitahaya_roja',   name:'Pitahaya Pulpa Roja',   en:'Red Flesh Dragon Fruit',   color:'#E91E63' },
-  { id:'pitahaya_blanca', name:'Pitahaya Pulpa Blanca',  en:'White Flesh Dragon Fruit', color:'#FF5722' },
-  { id:'golden_yellow',   name:'Golden Yellow',          en:'Yellow Dragon Fruit',      color:'#FDD835' },
-  { id:'palora',          name:'Palora Amarilla',        en:'Palora Yellow Dragon Fruit',color:'#FF8F00' },
-  { id:'limon',           name:'Limón Tahití',           en:'Persian Lime',             color:'#7CB342' },
-  { id:'granadilla',      name:'Granadilla',             en:'Sweet Passion Fruit',      color:'#7B1FA2' },
-  { id:'pepino',          name:'Pepino Melón',           en:'Pepino Melon',             color:'#00897B' },
-  { id:'tomate',          name:'Tomate de Árbol',        en:'Tree Tomato / Tamarillo',  color:'#D84315' },
+// ── FRUITS CONFIG ─────────────────────────────────────────
+const FRUITS = [
+  { id:'pitahaya_roja',   name:'Pitahaya Pulpa Roja',    en:'Red Flesh Dragon Fruit',    color:'#E91E63', kg:4.5,  iica:true  },
+  { id:'pitahaya_blanca', name:'Pitahaya Pulpa Blanca',  en:'White Flesh Dragon Fruit',  color:'#FF5722', kg:4.5,  iica:true  },
+  { id:'golden_yellow',   name:'Golden Yellow',          en:'Yellow Dragon Fruit',       color:'#FDD835', kg:4.5,  iica:true  },
+  { id:'palora',          name:'Palora Amarilla',        en:'Palora Yellow Dragon Fruit',color:'#FF8F00', kg:2.5,  iica:true  },
+  { id:'limon',           name:'Limón Tahití',           en:'Persian Lime · 33 lb',      color:'#7CB342', kg:15,   iica:false },
+  { id:'granadilla',      name:'Granadilla',             en:'Sweet Passion Fruit',       color:'#7B1FA2', kg:3,    iica:false },
+  { id:'pepino',          name:'Pepino Melón',           en:'Pepino Melon',              color:'#00897B', kg:2.5,  iica:false },
+  { id:'tomate',          name:'Tomate de Árbol',        en:'Tree Tomato / Tamarillo',   color:'#D84315', kg:2.5,  iica:false },
 ];
 
-const DISPONIBILIDAD = ['Alta','Media','Baja'];
+// Fixed costs per kg/caja
+const IICA_KG     = 0.0345;  // per kg, pitahayas only
+const AGROCAL_BOX = 0.50;    // per box
+const TRANSP_KG   = 0.13;    // per kg
 
 let sb, currentUser;
 
-// ── LOGIN ─────────────────────────────────────────────────
+// ── LOGIN ──────────────────────────────────────────────────
 function doLogin() {
   const pass = document.getElementById('loginPass').value.trim();
   const user = USERS[pass];
-  if (!user) {
-    document.getElementById('loginError').style.display = 'block';
-    return;
-  }
+  if (!user) { document.getElementById('loginError').style.display='block'; return; }
   currentUser = user;
-  sessionStorage.setItem('agrovip_user', user);
-  sessionStorage.setItem('agrovip_pass', pass);
+  sessionStorage.setItem('av_user', user);
   showApp();
 }
-
-function logout() {
-  sessionStorage.clear();
-  location.reload();
-}
+function logout() { sessionStorage.clear(); location.reload(); }
 
 function showApp() {
   document.getElementById('loginWrap').style.display = 'none';
-  document.getElementById('appWrap').style.display = 'block';
-  document.getElementById('navUser').textContent = `👤 ${currentUser}`;
-  sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  emailjs.init(EMAILJS_KEY);
-  buildProductRows();
-  loadCurrentData();
+  document.getElementById('appWrap').style.display   = 'block';
+  document.getElementById('navUser').textContent     = `👤 ${currentUser}`;
+  sb = supabase.createClient(SB_URL, SB_KEY);
+  emailjs.init(EJS_KEY);
+  buildFruitCards();
+  loadLastData();
 }
 
-// ── BUILD PRODUCT ROWS ───────────────────────────────────
-function buildProductRows() {
-  const wrap = document.getElementById('productRows');
-  wrap.innerHTML = PRODUCTS.map(p => `
-    <div class="product-row" style="border-color:${p.color};" id="row_${p.id}">
-      <div class="product-row-header">
-        <div class="product-dot" style="background:${p.color};"></div>
-        <h3>${p.name}</h3>
-        <span class="en">${p.en}</span>
+// ── BUILD CARDS ────────────────────────────────────────────
+function buildFruitCards() {
+  const wrap = document.getElementById('fruitCards');
+  wrap.innerHTML = FRUITS.map(f => `
+    <div class="fruit-card" id="card_${f.id}" style="border-color:${f.color};">
+      <div class="fruit-header" onclick="toggleCard('${f.id}')">
+        <div class="fruit-dot" style="background:${f.color};"></div>
+        <h3>${f.name}</h3>
+        <span class="kg-tag">${f.kg} kg/caja</span>
+        <span class="fob-result-mini" id="mini_${f.id}">—</span>
+        <i class="fa-solid fa-chevron-down fruit-toggle" id="tog_${f.id}"></i>
       </div>
-      <div class="row-fields">
-        <div class="field">
-          <label>FOB USD / Caja</label>
-          <input type="text" id="${p.id}_fob" placeholder="Ej: $11.50 – $14.00">
-          <div class="note">Include unidad: caja 10kg o 5kg</div>
+      <div class="fruit-body" id="body_${f.id}">
+        <p style="font-size:12px;color:var(--gray);margin:12px 0 4px;">
+          ${f.en} &nbsp;·&nbsp; ${f.kg} kg por caja
+          ${f.iica ? '&nbsp;·&nbsp; IICA aplicado ($'+IICA_KG+'/kg)' : ''}
+        </p>
+
+        <div class="costs-grid">
+          <div class="cost-item">
+            <label>Precio fruta (USD/kg)</label>
+            <div class="input-prefix">
+              <span class="prefix">$/kg</span>
+              <input type="number" id="${f.id}_fruta" step="0.01" min="0"
+                placeholder="0.00" oninput="calcFOB('${f.id}')">
+            </div>
+          </div>
+          <div class="cost-item">
+            <label>Empaque / caja (USD)</label>
+            <div class="input-prefix">
+              <span class="prefix">$/caja</span>
+              <input type="number" id="${f.id}_empaque" step="0.01" min="0"
+                placeholder="0.00" oninput="calcFOB('${f.id}')">
+            </div>
+          </div>
+          <div class="cost-item">
+            <label>Maquila PackVip (USD/caja)</label>
+            <div class="input-prefix">
+              <span class="prefix">$/caja</span>
+              <input type="number" id="${f.id}_maquila" step="0.01" min="0"
+                placeholder="0.00" oninput="calcFOB('${f.id}')">
+            </div>
+          </div>
+          <div class="cost-item">
+            <label>PLU Stickers (USD/caja)</label>
+            <div class="input-prefix">
+              <span class="prefix">$/caja</span>
+              <input type="number" id="${f.id}_plu" step="0.01" min="0"
+                placeholder="0.00" oninput="calcFOB('${f.id}')">
+            </div>
+          </div>
+          <div class="cost-item">
+            <label>Transporte interno</label>
+            <div class="fixed">$${TRANSP_KG}/kg × ${f.kg}kg = $${(TRANSP_KG*f.kg).toFixed(3)}/caja</div>
+          </div>
+          <div class="cost-item">
+            <label>Agrocalidad</label>
+            <div class="fixed">$${AGROCAL_BOX.toFixed(2)} / caja (fijo)</div>
+          </div>
+          ${f.iica ? `
+          <div class="cost-item">
+            <label>IICA</label>
+            <div class="fixed">$${IICA_KG}/kg × ${f.kg}kg = $${(IICA_KG*f.kg).toFixed(4)}/caja</div>
+          </div>` : ''}
+          <div class="cost-item">
+            <label>Margen (18%)</label>
+            <div class="fixed" id="${f.id}_margen_display">Sobre costo total</div>
+          </div>
+          <div class="cost-item">
+            <label>Disponibilidad</label>
+            <select id="${f.id}_disp" style="width:100%;padding:10px 12px;border:2px solid #E5E7EB;border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;outline:none;">
+              <option value="Alta">✅ Alta</option>
+              <option value="Media">⚠️ Media</option>
+              <option value="Baja">❌ Baja</option>
+            </select>
+          </div>
+          <div class="cost-item">
+            <label>Nota para cliente</label>
+            <div class="input-prefix">
+              <input type="text" id="${f.id}_nota" placeholder="Ej: Temporada alta...">
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <label>Disponibilidad</label>
-          <select id="${p.id}_disp">
-            ${DISPONIBILIDAD.map(d=>`<option value="${d}">${d}</option>`).join('')}
-          </select>
+
+        <!-- FOB RESULT -->
+        <div class="fob-box" id="fob_${f.id}">
+          <div class="fob-col">
+            <div class="lbl">Costo Total / caja</div>
+            <div class="val" id="${f.id}_costo">$0.00</div>
+            <div class="sub">${f.kg} kg</div>
+          </div>
+          <div class="fob-col">
+            <div class="lbl">FOB Publicado / caja</div>
+            <div class="val gold" id="${f.id}_fob_caja">$0.00</div>
+            <div class="sub">Margen 18% incluido</div>
+          </div>
+          <div class="fob-col">
+            <div class="lbl">FOB / kg</div>
+            <div class="val gold" id="${f.id}_fob_kg">$0.00</div>
+            <div class="sub">USD por kilogramo</div>
+          </div>
         </div>
-        <div class="field">
-          <label>Notas (opcional)</label>
-          <input type="text" id="${p.id}_notas" placeholder="Ej: Temporada alta, stock limitado...">
+        <div class="cost-breakdown" id="breakdown_${f.id}" style="background:rgba(6,78,59,.06);border-radius:8px;padding:12px 16px;margin-top:10px;">
+          <div class="row"><span class="lbl">Fruta</span><span id="${f.id}_b_fruta">—</span></div>
+          <div class="row"><span class="lbl">Empaque</span><span id="${f.id}_b_empaque">—</span></div>
+          <div class="row"><span class="lbl">Maquila</span><span id="${f.id}_b_maquila">—</span></div>
+          <div class="row"><span class="lbl">PLU</span><span id="${f.id}_b_plu">—</span></div>
+          <div class="row"><span class="lbl">Transporte</span><span id="${f.id}_b_transp">$${(TRANSP_KG*f.kg).toFixed(2)}</span></div>
+          <div class="row"><span class="lbl">Agrocalidad</span><span>$${AGROCAL_BOX.toFixed(2)}</span></div>
+          ${f.iica ? `<div class="row"><span class="lbl">IICA</span><span>$${(IICA_KG*f.kg).toFixed(3)}</span></div>` : ''}
+          <div class="row"><span class="lbl">Margen 18%</span><span id="${f.id}_b_margen">—</span></div>
+          <div class="row" style="border-top:1px solid rgba(6,78,59,.15);padding-top:6px;margin-top:4px;">
+            <span style="font-weight:700;color:var(--green);">FOB Total</span>
+            <span style="font-weight:800;color:var(--green);" id="${f.id}_b_total">—</span>
+          </div>
         </div>
       </div>
     </div>
   `).join('');
 }
 
-// ── LOAD CURRENT DATA ────────────────────────────────────
-async function loadCurrentData() {
+function toggleCard(id) {
+  const body = document.getElementById(`body_${id}`);
+  const tog  = document.getElementById(`tog_${id}`);
+  const open = body.classList.toggle('open');
+  tog.style.transform = open ? 'rotate(180deg)' : '';
+}
+
+// ── CALCULATE FOB ──────────────────────────────────────────
+function calcFOB(id) {
+  const f = FRUITS.find(x => x.id === id);
+  const fruta   = parseFloat(document.getElementById(`${id}_fruta`).value)   || 0;
+  const empaque = parseFloat(document.getElementById(`${id}_empaque`).value) || 0;
+  const maquila = parseFloat(document.getElementById(`${id}_maquila`).value) || 0;
+  const plu     = parseFloat(document.getElementById(`${id}_plu`).value)     || 0;
+
+  const c_fruta   = fruta * f.kg;
+  const c_transp  = TRANSP_KG * f.kg;
+  const c_agrocal = AGROCAL_BOX;
+  const c_iica    = f.iica ? IICA_KG * f.kg : 0;
+
+  const costo_base = c_fruta + empaque + maquila + plu + c_transp + c_agrocal + c_iica;
+  const margen_val = costo_base * MARGIN;
+  const fob_caja   = costo_base + margen_val;
+  const fob_kg     = f.kg > 0 ? fob_caja / f.kg : 0;
+
+  // Update result box
+  document.getElementById(`${id}_costo`).textContent    = `$${costo_base.toFixed(2)}`;
+  document.getElementById(`${id}_fob_caja`).textContent = `$${fob_caja.toFixed(2)}`;
+  document.getElementById(`${id}_fob_kg`).textContent   = `$${fob_kg.toFixed(2)}`;
+  document.getElementById(`mini_${id}`).textContent     = `$${fob_caja.toFixed(2)}/caja`;
+  document.getElementById(`${id}_margen_display`).textContent = `$${margen_val.toFixed(2)} (18%)`;
+
+  // Breakdown
+  document.getElementById(`${id}_b_fruta`).textContent   = `$${c_fruta.toFixed(2)}`;
+  document.getElementById(`${id}_b_empaque`).textContent = `$${empaque.toFixed(2)}`;
+  document.getElementById(`${id}_b_maquila`).textContent = `$${maquila.toFixed(2)}`;
+  document.getElementById(`${id}_b_plu`).textContent     = `$${plu.toFixed(2)}`;
+  document.getElementById(`${id}_b_margen`).textContent  = `$${margen_val.toFixed(2)}`;
+  document.getElementById(`${id}_b_total`).textContent   = `$${fob_caja.toFixed(2)}`;
+}
+
+// ── LOAD LAST DATA ─────────────────────────────────────────
+async function loadLastData() {
   try {
-    const { data, error } = await sb
-      .from('precios_semana')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+    const { data } = await sb.from('precios_semana')
+      .select('*').order('created_at',{ascending:false}).limit(1).single();
+    if (!data) { updateStatus(null); return; }
 
-    if (error || !data) { updateStatusBanner(null); return; }
-
-    // Fill header
     document.getElementById('fSemana').value = data.semana || '';
     document.getElementById('fFecha').value  = data.fecha  || '';
     document.getElementById('fNota').value   = data.nota   || '';
 
-    // Fill products
-    const precios = data.precios || {};
-    PRODUCTS.forEach(p => {
-      const pd = precios[p.id] || {};
-      document.getElementById(`${p.id}_fob`).value   = pd.fob   || '';
-      document.getElementById(`${p.id}_disp`).value  = pd.disponibilidad || 'Alta';
-      document.getElementById(`${p.id}_notas`).value = pd.notas  || '';
+    const p = data.precios || {};
+    FRUITS.forEach(f => {
+      const pd = p[f.id] || {};
+      if (pd.fruta_kg)   { document.getElementById(`${f.id}_fruta`).value   = pd.fruta_kg; }
+      if (pd.empaque)    { document.getElementById(`${f.id}_empaque`).value  = pd.empaque; }
+      if (pd.maquila)    { document.getElementById(`${f.id}_maquila`).value  = pd.maquila; }
+      if (pd.plu)        { document.getElementById(`${f.id}_plu`).value      = pd.plu; }
+      if (pd.disponibilidad) document.getElementById(`${f.id}_disp`).value   = pd.disponibilidad;
+      if (pd.nota)       { document.getElementById(`${f.id}_nota`).value     = pd.nota; }
+      calcFOB(f.id);
     });
-
-    updateStatusBanner(data.updated_at || data.created_at);
-  } catch(e) {
-    updateStatusBanner(null);
-  }
+    updateStatus(data.updated_at || data.created_at);
+  } catch(e) { updateStatus(null); }
 }
 
-// ── STATUS BANNER ────────────────────────────────────────
-function updateStatusBanner(updatedAt) {
-  const banner = document.getElementById('statusBanner');
-  const text   = document.getElementById('statusText');
-
-  if (!updatedAt) {
-    banner.className = 'status-banner status-warn';
-    text.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> &nbsp;No hay precios cargados aún. Completa el formulario y guarda.';
+function updateStatus(ts) {
+  const el  = document.getElementById('statusBanner');
+  const txt = document.getElementById('statusText');
+  if (!ts) {
+    el.className = 'status-banner s-warn';
+    txt.innerHTML = '⚠️ &nbsp;Sin datos previos. Completa el formulario y guarda.';
     return;
   }
-
-  const lastUpdate = new Date(updatedAt);
-  const now        = new Date();
-  const daysDiff   = Math.floor((now - lastUpdate) / (1000*60*60*24));
-  const dateStr    = lastUpdate.toLocaleDateString('es-EC', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
-
-  if (daysDiff <= 7) {
-    banner.className = 'status-banner status-ok';
-    text.innerHTML = `✅ &nbsp;Última actualización: <strong>${dateStr}</strong> (hace ${daysDiff} día${daysDiff!==1?'s':''}). Precios al día.`;
+  const days = Math.floor((new Date() - new Date(ts)) / 86400000);
+  const dateStr = new Date(ts).toLocaleDateString('es-EC',{weekday:'long',day:'numeric',month:'long'});
+  if (days <= 7) {
+    el.className = 'status-banner s-ok';
+    txt.innerHTML = `✅ &nbsp;Última actualización: <strong>${dateStr}</strong> (hace ${days} día${days!==1?'s':''}).`;
   } else {
-    banner.className = 'status-banner status-danger';
-    text.innerHTML = `⚠️ &nbsp;Última actualización: <strong>${dateStr}</strong> — Han pasado <strong>${daysDiff} días</strong>. ¡Actualizar precios esta semana!`;
+    el.className = 'status-banner s-danger';
+    txt.innerHTML = `⚠️ &nbsp;Última actualización: <strong>${dateStr}</strong> — Han pasado <strong>${days} días</strong>. ¡Actualizar precios!`;
   }
 }
 
-// ── SAVE ─────────────────────────────────────────────────
-async function savePrecios() {
+// ── SAVE ALL ───────────────────────────────────────────────
+async function saveAll() {
   const btn = document.getElementById('btnSave');
   btn.disabled = true;
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
 
-  // Collect data
   const semana = document.getElementById('fSemana').value.trim();
   const fecha  = document.getElementById('fFecha').value.trim();
   const nota   = document.getElementById('fNota').value.trim();
@@ -339,51 +503,66 @@ async function savePrecios() {
     return;
   }
 
+  // Build precios object
   const precios = {};
-  PRODUCTS.forEach(p => {
-    precios[p.id] = {
-      producto:       p.name,
-      variedad:       p.en,
-      fob:            document.getElementById(`${p.id}_fob`).value.trim(),
-      disponibilidad: document.getElementById(`${p.id}_disp`).value,
-      notas:          document.getElementById(`${p.id}_notas`).value.trim(),
+  FRUITS.forEach(f => {
+    const fruta_kg = parseFloat(document.getElementById(`${f.id}_fruta`).value)   || 0;
+    const empaque  = parseFloat(document.getElementById(`${f.id}_empaque`).value) || 0;
+    const maquila  = parseFloat(document.getElementById(`${f.id}_maquila`).value) || 0;
+    const plu      = parseFloat(document.getElementById(`${f.id}_plu`).value)     || 0;
+    const disp     = document.getElementById(`${f.id}_disp`).value;
+    const notaF    = document.getElementById(`${f.id}_nota`).value.trim();
+
+    const c_fruta   = fruta_kg * f.kg;
+    const c_transp  = TRANSP_KG * f.kg;
+    const c_iica    = f.iica ? IICA_KG * f.kg : 0;
+    const costo     = c_fruta + empaque + maquila + plu + c_transp + AGROCAL_BOX + c_iica;
+    const fob_caja  = costo * (1 + MARGIN);
+    const fob_kg    = f.kg > 0 ? fob_caja / f.kg : 0;
+
+    precios[f.id] = {
+      producto:       f.name,
+      variedad:       f.en,
+      kg_por_caja:    f.kg,
+      fruta_kg,  empaque, maquila, plu,
+      fob:            `$${fob_caja.toFixed(2)} / caja (${f.kg}kg)`,
+      fob_caja:       parseFloat(fob_caja.toFixed(2)),
+      fob_kg:         parseFloat(fob_kg.toFixed(2)),
+      disponibilidad: disp,
+      notas:          notaF || `Precio puede variar según volumen de pedido.`,
     };
   });
 
   try {
-    // Upsert — always insert new row (keeps history)
     const { error } = await sb.from('precios_semana').insert({
       semana, fecha, nota, precios,
       updated_by: currentUser,
       updated_at: new Date().toISOString(),
     });
-
     if (error) throw error;
-
-    showToast('✅ Precios guardados y publicados exitosamente.');
-    updateStatusBanner(new Date().toISOString());
-
+    showToast('✅ Precios FOB publicados exitosamente.');
+    updateStatus(new Date().toISOString());
   } catch(e) {
-    showToast('Error guardando: ' + e.message, true);
+    showToast('Error: ' + e.message, true);
   }
 
   btn.disabled = false;
   btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios';
 }
 
-// ── TOAST ────────────────────────────────────────────────
-function showToast(msg, isError=false) {
+// ── TOAST ──────────────────────────────────────────────────
+function showToast(msg, isErr=false) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast' + (isError ? ' error' : '');
+  t.className   = 'toast ' + (isErr ? 'err' : 'ok');
   t.style.display = 'flex';
-  setTimeout(() => t.style.display = 'none', 4000);
+  setTimeout(() => t.style.display='none', 4500);
 }
 
-// ── AUTO LOGIN si ya hay sesión ──────────────────────────
+// ── AUTO LOGIN ─────────────────────────────────────────────
 window.onload = () => {
-  const saved = sessionStorage.getItem('agrovip_user');
-  if (saved) { currentUser = saved; showApp(); }
+  const u = sessionStorage.getItem('av_user');
+  if (u) { currentUser = u; showApp(); }
 };
 </script>
 </body>
