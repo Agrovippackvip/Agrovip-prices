@@ -235,7 +235,7 @@ const MARGIN  = 0.18;
 
 const USERS = { 'agrovip2025':'Daniel Polit', 'lili2025':'Lilibeth' };
 const ALERT_EMAILS = [
-  { name:'Daniel',   email:'ventas@agrovipsas.com' },
+  { name:'Daniel',   email:'gerencia@agrovipsa.com' },
   { name:'Lilibeth', email:'lilibeth@agrovipsa.com' },
 ];
 
@@ -542,12 +542,42 @@ async function saveAll() {
     if (error) throw error;
     showToast('✅ Precios FOB publicados exitosamente.');
     updateStatus(new Date().toISOString());
+    sendPriceAlert(semana, fecha, precios);
   } catch(e) {
     showToast('Error: ' + e.message, true);
   }
 
   btn.disabled = false;
   btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios';
+}
+
+// ── EMAIL ALERT ───────────────────────────────────────────
+async function sendPriceAlert(semana, fecha, precios) {
+  const recipients = [
+    { name: 'Daniel',    email: 'gerencia@agrovipsa.com' },
+    { name: 'Lilibeth',  email: 'lilibeth@agrovipsa.com' },
+    { name: 'Pablo',     email: 'gerencia@packvipsas.com' },
+  ];
+
+  // Build price summary for email
+  const lines = Object.values(precios).map(p =>
+    `• ${p.producto}: ${p.fob} (${p.disponibilidad})`
+  ).join('\n');
+
+  const msgBody = `Hola, los precios FOB de la Semana ${semana} (${fecha}) han sido actualizados por ${currentUser}.\n\nPRECIOS PUBLICADOS:\n${lines}\n\nVer en: https://agrovippackvip.github.io/Agrovip-prices/precios.html`;
+
+  for (const r of recipients) {
+    try {
+      await emailjs.send(EJS_SVC, EJS_TPL, {
+        email:   r.email,
+        asunto:  `✅ Precios FOB Semana ${semana} publicados — AgroVIP`,
+        mensaje: msgBody,
+      });
+      console.log(`Email sent to ${r.name}`);
+    } catch(e) {
+      console.warn(`Email to ${r.name} failed:`, e);
+    }
+  }
 }
 
 // ── TOAST ──────────────────────────────────────────────────
