@@ -10,7 +10,7 @@
   <style>
     :root{--green:#064E3B;--green-mid:#065F46;--green-light:#D1FAE5;
           --gold:#F59E0B;--gold-light:#FEF3C7;--cream:#F8FAF4;
-          --dark:#1F2937;--gray:#6B7280;--white:#fff;}
+          --dark:#1F2937;--gray:#6B7280;--white:#fff;--red:#DC2626;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
     body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--dark);}
@@ -26,32 +26,41 @@
     .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,.12);color:#fff;}
     .nav-cta{background:var(--gold)!important;color:var(--green)!important;font-weight:700!important;margin-left:6px;}
 
-    .page-hero{
-      background:linear-gradient(135deg, var(--green) 0%, #022C22 100%);
-      padding:60px 40px;text-align:center;
-    }
+    .page-hero{background:linear-gradient(135deg,var(--green) 0%,#022C22 100%);
+        padding:60px 40px;text-align:center;}
     .page-hero h1{font-family:'Poppins',sans-serif;font-size:44px;font-weight:800;color:#fff;margin-bottom:10px;}
     .page-hero p{color:#A7F3D0;font-size:17px;}
 
-    .week-badge{
-      display:inline-flex;align-items:center;gap:8px;
-      background:var(--gold);color:var(--green);
-      font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;
-      padding:8px 24px;border-radius:50px;margin-bottom:20px;
-    }
+    .week-badge{display:inline-flex;align-items:center;gap:8px;
+        background:var(--gold);color:var(--green);
+        font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;
+        padding:8px 24px;border-radius:50px;margin-bottom:20px;}
 
     .section{padding:60px 40px;max-width:1200px;margin:0 auto;}
 
-    /* DISCLAIMER BOX */
-    .disclaimer{
-      background:var(--gold-light);border:1px solid var(--gold);
-      border-radius:12px;padding:18px 24px;
-      display:flex;gap:14px;align-items:flex-start;margin-bottom:40px;
+    /* STALE WARNING */
+    .stale-warning{
+      background:#FEF2F2;border:2px solid var(--red);border-radius:14px;
+      padding:20px 24px;margin-bottom:32px;
+      display:none;align-items:flex-start;gap:14px;
     }
+    .stale-warning i{color:var(--red);font-size:24px;flex-shrink:0;margin-top:2px;}
+    .stale-warning h4{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;
+      color:var(--red);margin-bottom:4px;}
+    .stale-warning p{font-size:14px;color:#7F1D1D;line-height:1.6;}
+
+    /* LOADING */
+    .loading{text-align:center;padding:60px;color:var(--gray);}
+    .loading i{font-size:32px;color:var(--green);margin-bottom:12px;display:block;}
+
+    /* DISCLAIMER */
+    .disclaimer{background:var(--gold-light);border:1px solid var(--gold);
+        border-radius:12px;padding:18px 24px;
+        display:flex;gap:14px;align-items:flex-start;margin-bottom:32px;}
     .disclaimer i{color:var(--gold);font-size:20px;margin-top:2px;flex-shrink:0;}
     .disclaimer p{font-size:14px;color:#92400E;line-height:1.6;}
 
-    /* PRICE TABLE */
+    /* TABLE */
     .price-wrap{background:#fff;border-radius:16px;overflow:hidden;
         box-shadow:0 4px 24px rgba(6,78,59,.10);}
     .price-table{width:100%;border-collapse:collapse;}
@@ -65,35 +74,28 @@
     .product-name{font-weight:700;color:var(--dark);}
     .product-sub{font-size:12px;color:var(--gray);margin-top:2px;}
     .price-cell{font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;color:var(--green);}
-    .region-tag{font-size:12px;background:#F3F4F6;color:var(--gray);
-        padding:3px 10px;border-radius:50px;display:inline-block;}
     .avail-pill{padding:4px 12px;border-radius:50px;font-size:12px;font-weight:700;
         text-transform:uppercase;display:inline-block;}
-    .avail-alta{background:#DCFCE7;color:#166534;}
-    .avail-media{background:#FEF3C7;color:#92400E;}
-    .avail-baja{background:#FEE2E2;color:#991B1B;}
-    .calibre-cell{font-size:13px;color:var(--gray);}
+    .avail-Alta{background:#DCFCE7;color:#166534;}
+    .avail-Media{background:#FEF3C7;color:#92400E;}
+    .avail-Baja{background:#FEE2E2;color:#991B1B;}
     .notes-cell{font-size:12px;color:var(--gray);font-style:italic;}
 
-    /* CTA REQUEST */
-    .request-box{
-      background:var(--green);border-radius:16px;
-      padding:48px;text-align:center;margin-top:48px;
-    }
+    /* CTA */
+    .request-box{background:var(--green);border-radius:16px;
+        padding:48px;text-align:center;margin-top:48px;}
     .request-box h3{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;
         color:#fff;margin-bottom:12px;}
     .request-box p{color:#A7F3D0;margin-bottom:32px;font-size:16px;}
     .request-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
         border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;
-        font-size:15px;text-decoration:none;transition:transform .2s;cursor:pointer;border:none;}
+        font-size:15px;text-decoration:none;transition:transform .2s;cursor:pointer;border:none;margin:4px;}
     .btn:hover{transform:translateY(-2px);}
     .btn-gold{background:var(--gold);color:var(--green);}
     .btn-wa{background:#25D366;color:#fff;}
     .btn-li{background:#0A66C2;color:#fff;}
-    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff;}
 
-    /* FOOTER */
     footer{background:var(--green);color:#A7F3D0;padding:40px;
         display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:80px;}
     footer h4{color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;
@@ -103,7 +105,6 @@
     .footer-bottom{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);
         padding-top:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.35);}
 
-    /* FLOATING */
     .contact-bar{position:fixed;bottom:24px;right:24px;
         display:flex;flex-direction:column;gap:10px;z-index:200;}
     .contact-bar a{width:52px;height:52px;border-radius:50%;
@@ -116,8 +117,7 @@
     @media(max-width:768px){
       nav{padding:0 16px;}
       .section{padding:40px 16px;}
-      .price-table th:nth-child(4),.price-table td:nth-child(4),
-      .price-table th:nth-child(6),.price-table td:nth-child(6){display:none;}
+      .price-table th:nth-child(4),.price-table td:nth-child(4){display:none;}
       footer{grid-template-columns:1fr;}
     }
   </style>
@@ -135,32 +135,46 @@
 </nav>
 
 <div class="page-hero">
-  <div class="week-badge" id="week-badge"><i class="fa-solid fa-calendar-week"></i> <span id="badge-text">Loading...</span></div>
+  <div class="week-badge" id="weekBadge"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
   <h1><i class="fa-solid fa-table-list"></i> Weekly FOB Prices</h1>
-  <p id="hero-date">FOB Guayaquil, Ecuador — Updated every Thursday</p>
+  <p id="heroDate">FOB Guayaquil, Ecuador — Updated every Thursday</p>
 </div>
 
 <div class="section">
-  <div class="disclaimer">
-    <i class="fa-solid fa-circle-info"></i>
-    <p id="disclaimer-text">Prices are FOB Guayaquil. CIF pricing depends on destination, carrier, and season — quoted upon request. Prices subject to volume and availability.</p>
+
+  <!-- STALE WARNING -->
+  <div class="stale-warning" id="staleWarning">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>
+      <h4>⚠️ Prices may not reflect current market — Please contact us to confirm</h4>
+      <p id="staleText">Our team updates prices every Thursday. These prices are from last week — reach out directly for the latest quotes.</p>
+    </div>
   </div>
 
-  <div class="price-wrap">
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <i class="fa-solid fa-circle-info"></i>
+    <p id="disclaimerText">Prices are FOB Guayaquil. CIF pricing depends on destination, carrier, and season — quoted upon request.</p>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loadingEl">
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    <p>Loading current prices...</p>
+  </div>
+
+  <!-- TABLE -->
+  <div class="price-wrap" id="priceWrap" style="display:none;">
     <table class="price-table">
       <thead>
         <tr>
           <th>Product</th>
           <th>FOB Price / Box</th>
-          <th>Caliber</th>
-          <th>Region</th>
           <th>Availability</th>
           <th>Notes</th>
         </tr>
       </thead>
-      <tbody id="price-tbody">
-        <!-- Populated by JS -->
-      </tbody>
+      <tbody id="priceTbody"></tbody>
     </table>
   </div>
 
@@ -168,9 +182,9 @@
     <h3>Need a CIF Quote or Custom Volume?</h3>
     <p>Send us your destination port, target volume, and preferred delivery window.<br>We'll respond within 24 hours.</p>
     <div class="request-btns">
-      <a href="mailto:ventas@agrovipsas.com?subject=CIF%20Quote%20Request%20%E2%80%94%20AgroVIP&body=Hello%20AgroVIP%2C%0A%0AI%20would%20like%20to%20request%20a%20CIF%20quote%20for%3A%0A%0AProduct(s)%3A%20%0ADestination%20port%3A%20%0AVolume%20(boxes%2Fcontainers)%3A%20%0APreferred%20delivery%20window%3A%20%0A%0AThank%20you." class="btn btn-gold"><i class="fa-solid fa-envelope"></i> Request CIF Quote by Email</a>
-      <a href="https://wa.me/593998945387?text=Hello%20AgroVIP!%20I%20saw%20your%20weekly%20prices%20and%20I'd%20like%20to%20request%20a%20CIF%20quote." target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
-      <a href="https://www.linkedin.com/company/agrovip" target="_blank" class="btn btn-li"><i class="fa-brands fa-linkedin-in"></i> Connect on LinkedIn</a>
+      <a href="mailto:ventas@agrovipsas.com?subject=CIF%20Quote%20Request%20%E2%80%94%20AgroVIP&body=Hello%20AgroVIP%2C%0A%0AProduct(s)%3A%20%0ADestination%20port%3A%20%0AVolume%20(boxes%2Fcontainers)%3A%20%0APreferred%20delivery%20window%3A%20" class="btn btn-gold"><i class="fa-solid fa-envelope"></i> Request CIF Quote</a>
+      <a href="https://wa.me/593998945387?text=Hello%20AgroVIP!%20I%20saw%20your%20weekly%20prices%20and%20I'd%20like%20a%20CIF%20quote." target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+      <a href="https://www.linkedin.com/company/agrovip" target="_blank" class="btn btn-li"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
     </div>
   </div>
 </div>
@@ -197,57 +211,91 @@
 </footer>
 
 <div class="contact-bar">
-  <a href="https://wa.me/593998945387" target="_blank" class="cb-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-  <a href="mailto:ventas@agrovipsas.com" class="cb-mail" title="Email"><i class="fa-solid fa-envelope"></i></a>
-  <a href="https://www.linkedin.com/company/agrovip" target="_blank" class="cb-li" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  <a href="https://wa.me/593998945387" target="_blank" class="cb-wa"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="mailto:ventas@agrovipsas.com" class="cb-mail"><i class="fa-solid fa-envelope"></i></a>
+  <a href="https://www.linkedin.com/company/agrovip" target="_blank" class="cb-li"><i class="fa-brands fa-linkedin-in"></i></a>
 </div>
 
-<!-- Load datos.js then render -->
-<script src="./datos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const d = DATOS_SEMANA;
+const SUPABASE_URL = 'https://asexyvzorhdddsgjqczh.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZXh5dnpvcmhkZGRzZ2pxY3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NjU2NTcsImV4cCI6MjA2MDM0MTY1N30.wABmVMQzKuSvoAfyMHkDEzpqmwehiSTTPKS4_z7SHac';
 
-  // Badge + header
-  document.getElementById('badge-text').textContent = `Semana ${d.semana} — ${d.fecha}`;
-  document.getElementById('hero-date').textContent = `FOB Guayaquil, Ecuador — ${d.fecha}`;
-  document.getElementById('disclaimer-text').textContent = d.nota;
+const COLORS = {
+  pitahaya_roja:'#E91E63', pitahaya_blanca:'#FF5722',
+  golden_yellow:'#FDD835', palora:'#FF8F00',
+  limon:'#7CB342', granadilla:'#7B1FA2',
+  pepino:'#00897B', tomate:'#D84315'
+};
 
-  // Availability pill
-  function availPill(a) {
-    const cls = a === 'Alta' ? 'avail-alta' : a === 'Media' ? 'avail-media' : 'avail-baja';
-    const icon = a === 'Alta' ? '✅' : a === 'Media' ? '⚠️' : '❌';
-    return `<span class="avail-pill ${cls}">${icon} ${a}</span>`;
-  }
+async function loadPrecios() {
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  try {
+    const { data, error } = await sb
+      .from('precios_semana')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
 
-  // Fruit color dots
-  const colors = {
-    'Pitahaya Pulpa Roja':'#E91E63','Pitahaya Pulpa Blanca':'#FF5722',
-    'Golden Yellow':'#FDD835','Palora Amarilla':'#FF8F00',
-    'Limón Tahití':'#7CB342','Granadilla':'#7B1FA2',
-    'Pepino Melón':'#00897B','Tomate de Árbol':'#D84315'
-  };
+    document.getElementById('loadingEl').style.display = 'none';
 
-  const tbody = document.getElementById('price-tbody');
-  d.precios.forEach(p => {
-    const dot = colors[p.producto] || '#064E3B';
-    tbody.innerHTML += `
-      <tr>
-        <td>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div style="width:10px;height:10px;border-radius:50%;background:${dot};flex-shrink:0;"></div>
-            <div>
-              <div class="product-name">${p.producto}</div>
-              <div class="product-sub">${p.variedad}</div>
+    if (error || !data) {
+      document.getElementById('weekBadge').innerHTML = '<i class="fa-solid fa-calendar-week"></i> Prices loading soon';
+      document.getElementById('staleWarning').style.display = 'flex';
+      return;
+    }
+
+    // Badge + header
+    document.getElementById('weekBadge').innerHTML =
+      `<i class="fa-solid fa-calendar-week"></i> Semana ${data.semana} — ${data.fecha}`;
+    document.getElementById('heroDate').textContent =
+      `FOB Guayaquil, Ecuador — ${data.fecha}`;
+    document.getElementById('disclaimerText').textContent = data.nota;
+
+    // Check if stale (> 7 days)
+    const lastUpdate = new Date(data.updated_at || data.created_at);
+    const daysDiff   = Math.floor((new Date() - lastUpdate) / (1000*60*60*24));
+    if (daysDiff > 7) {
+      const sw = document.getElementById('staleWarning');
+      sw.style.display = 'flex';
+      document.getElementById('staleText').textContent =
+        `Our team updates prices every Thursday. Last update was ${daysDiff} days ago (${lastUpdate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}). Please contact us to confirm current availability and pricing.`;
+    }
+
+    // Build table
+    const tbody  = document.getElementById('priceTbody');
+    const precios = data.precios || {};
+    Object.entries(precios).forEach(([id, p]) => {
+      const dot = COLORS[id] || '#064E3B';
+      const availClass = `avail-${p.disponibilidad || 'Alta'}`;
+      const availIcon  = p.disponibilidad === 'Alta' ? '✅' : p.disponibilidad === 'Media' ? '⚠️' : '❌';
+      tbody.innerHTML += `
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:10px;height:10px;border-radius:50%;background:${dot};flex-shrink:0;"></div>
+              <div>
+                <div class="product-name">${p.producto || ''}</div>
+                <div class="product-sub">${p.variedad || ''}</div>
+              </div>
             </div>
-          </div>
-        </td>
-        <td class="price-cell">${p.fob}</td>
-        <td class="calibre-cell">${p.calibre}</td>
-        <td><span class="region-tag">${p.region}</span></td>
-        <td>${availPill(p.disponibilidad)}</td>
-        <td class="notes-cell">${p.notas}</td>
-      </tr>`;
-  });
+          </td>
+          <td class="price-cell">${p.fob || '—'}</td>
+          <td><span class="avail-pill ${availClass}">${availIcon} ${p.disponibilidad || 'Alta'}</span></td>
+          <td class="notes-cell">${p.notas || ''}</td>
+        </tr>`;
+    });
+
+    document.getElementById('priceWrap').style.display = 'block';
+
+  } catch(e) {
+    document.getElementById('loadingEl').innerHTML =
+      '<i class="fa-solid fa-triangle-exclamation" style="color:#DC2626;"></i><p>Error loading prices. Please contact us directly.</p>';
+  }
+}
+
+loadPrecios();
 </script>
 </body>
 </html>

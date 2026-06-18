@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualizar Precios — AgroVIP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root{--green:#064E3B;--gold:#F59E0B;--cream:#F8FAF4;--dark:#1F2937;--gray:#6B7280;--red:#DC2626;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;}
+
+    /* LOGIN */
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--green) 0%,#022C22 100%);}
+    .login-box{background:#fff;border-radius:20px;padding:48px;width:100%;max-width:400px;text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+    .login-box h2{font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--green);margin-bottom:8px;}
+    .login-box p{color:var(--gray);font-size:14px;margin-bottom:32px;}
+    .login-box input{width:100%;padding:14px 18px;border:2px solid #E5E7EB;border-radius:10px;
+      font-size:16px;margin-bottom:16px;outline:none;transition:border .2s;font-family:'Lato',sans-serif;}
+    .login-box input:focus{border-color:var(--green);}
+    .login-box button{width:100%;padding:14px;background:var(--green);color:#fff;border:none;
+      border-radius:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;
+      cursor:pointer;transition:background .2s;}
+    .login-box button:hover{background:#065F46;}
+    .login-error{color:var(--red);font-size:13px;margin-top:8px;display:none;}
+
+    /* MAIN APP */
+    .app{display:none;}
+    nav{background:var(--green);height:64px;display:flex;align-items:center;padding:0 32px;
+      box-shadow:0 2px 16px rgba(0,0,0,.2);}
+    .nav-brand{font-family:'Poppins',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-right:auto;}
+    .nav-brand span{color:var(--gold);}
+    .nav-user{color:#A7F3D0;font-size:13px;margin-right:16px;}
+    .nav-logout{background:rgba(255,255,255,.1);color:#fff;border:none;padding:7px 16px;
+      border-radius:8px;cursor:pointer;font-size:13px;transition:background .2s;}
+    .nav-logout:hover{background:rgba(255,255,255,.2);}
+    .nav-back{color:#D1FAE5;text-decoration:none;font-size:13px;margin-right:16px;
+      display:flex;align-items:center;gap:6px;}
+    .nav-back:hover{color:#fff;}
+
+    .container{max-width:900px;margin:0 auto;padding:40px 24px;}
+
+    /* STATUS BANNER */
+    .status-banner{border-radius:12px;padding:16px 20px;margin-bottom:32px;
+      display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;}
+    .status-ok{background:#DCFCE7;color:#166534;border:1px solid #BBF7D0;}
+    .status-warn{background:#FEF3C7;color:#92400E;border:1px solid #FDE68A;}
+    .status-danger{background:#FEE2E2;color:#991B1B;border:1px solid #FECACA;}
+
+    /* WEEK HEADER */
+    .week-header{background:#fff;border-radius:16px;padding:28px;margin-bottom:24px;
+      box-shadow:0 2px 12px rgba(6,78,59,.08);display:flex;gap:20px;align-items:flex-end;}
+    .week-header .field{flex:1;}
+    .week-header label{display:block;font-size:12px;font-weight:700;color:var(--green);
+      text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+    .week-header input,.week-header textarea{width:100%;padding:10px 14px;
+      border:2px solid #E5E7EB;border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;
+      outline:none;transition:border .2s;}
+    .week-header input:focus,.week-header textarea:focus{border-color:var(--green);}
+
+    /* PRODUCT ROWS */
+    .products-title{font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;
+      color:var(--green);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+    .product-row{background:#fff;border-radius:14px;padding:24px;margin-bottom:14px;
+      box-shadow:0 2px 12px rgba(6,78,59,.07);border-left:5px solid;}
+    .product-row-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+    .product-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .product-row-header h3{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--dark);}
+    .product-row-header .en{font-size:12px;color:var(--gray);margin-left:auto;}
+    .row-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+    .field label{display:block;font-size:11px;font-weight:700;color:var(--green);
+      text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+    .field input,.field select{width:100%;padding:9px 12px;border:2px solid #E5E7EB;
+      border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;
+      outline:none;transition:border .2s;background:#fff;}
+    .field input:focus,.field select:focus{border-color:var(--green);}
+    .field .note{font-size:11px;color:var(--gray);margin-top:4px;}
+
+    /* SAVE BUTTON */
+    .save-wrap{text-align:center;margin-top:36px;padding-bottom:60px;}
+    .btn-save{background:var(--green);color:#fff;border:none;padding:18px 56px;
+      border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;
+      cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:10px;
+      box-shadow:0 4px 20px rgba(6,78,59,.3);}
+    .btn-save:hover{background:#065F46;transform:translateY(-2px);box-shadow:0 8px 28px rgba(6,78,59,.4);}
+    .btn-save:disabled{background:#9CA3AF;cursor:not-allowed;transform:none;box-shadow:none;}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);
+      background:var(--green);color:#fff;padding:14px 28px;border-radius:50px;
+      font-weight:700;font-size:15px;box-shadow:0 8px 32px rgba(0,0,0,.25);
+      display:none;z-index:999;align-items:center;gap:10px;}
+    .toast.error{background:var(--red);}
+
+    @media(max-width:768px){
+      .row-fields{grid-template-columns:1fr 1fr;}
+      .week-header{flex-direction:column;}
+      .container{padding:24px 16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ─────────────────────────────────────────────── -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div style="font-size:48px;margin-bottom:16px;">🌿</div>
+    <h2>AGROVIP</h2>
+    <p>Panel de actualización de precios semanales</p>
+    <input type="password" id="loginPass" placeholder="Ingresa tu clave" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()"><i class="fa-solid fa-lock-open"></i> Ingresar</button>
+    <div class="login-error" id="loginError">Clave incorrecta. Intenta de nuevo.</div>
+  </div>
+</div>
+
+<!-- ── APP ───────────────────────────────────────────────── -->
+<div class="app" id="appWrap">
+  <nav>
+    <span class="nav-brand">AGRO<span>VIP</span> &nbsp;·&nbsp; <span style="font-size:14px;font-weight:400;color:#A7F3D0;">Panel de Precios</span></span>
+    <a href="./precios.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Ver sitio público</a>
+    <span class="nav-user" id="navUser"></span>
+    <button class="nav-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+  </nav>
+
+  <div class="container">
+    <div id="statusBanner" class="status-banner status-ok">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="statusText">Cargando estado...</span>
+    </div>
+
+    <!-- WEEK INFO -->
+    <div class="week-header">
+      <div class="field">
+        <label>Número de Semana</label>
+        <input type="number" id="fSemana" placeholder="Ej: 26" min="1" max="53">
+      </div>
+      <div class="field" style="flex:2;">
+        <label>Descripción del período</label>
+        <input type="text" id="fFecha" placeholder="Ej: Semana del 23 al 29 de Junio, 2025">
+      </div>
+      <div class="field" style="flex:2;">
+        <label>Nota general (aparece en la tabla)</label>
+        <input type="text" id="fNota" placeholder="Precios FOB Guayaquil. Sujetos a volumen y temporada.">
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="products-title"><i class="fa-solid fa-leaf"></i> Precios por Producto</div>
+    <div id="productRows"></div>
+
+    <div class="save-wrap">
+      <button class="btn-save" id="btnSave" onclick="savePrecios()">
+        <i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios
+      </button>
+      <p style="margin-top:16px;color:var(--gray);font-size:13px;">
+        Los precios se publican inmediatamente en el sitio público.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────
+const SUPABASE_URL = 'https://asexyvzorhdddsgjqczh.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzZXh5dnpvcmhkZGRzZ2pxY3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ3NjU2NTcsImV4cCI6MjA2MDM0MTY1N30.wABmVMQzKuSvoAfyMHkDEzpqmwehiSTTPKS4_z7SHac';
+const EMAILJS_SERVICE  = 'service_lptgrd5';
+const EMAILJS_TEMPLATE = 'template_2z6dond';
+const EMAILJS_KEY      = 'ZvrnAlzPIyQhSUzWj';
+
+// Claves de acceso
+const USERS = {
+  'agrovip2025':  'Daniel Polit',
+  'lili2025':     'Lilibeth'
+};
+
+// Emails para alertas
+const ALERT_EMAILS = [
+  { name: 'Daniel',    email: 'ventas@agrovipsas.com' },
+  { name: 'Lilibeth',  email: 'lilibeth@agrovipsa.com' },
+];
+
+const PRODUCTS = [
+  { id:'pitahaya_roja',   name:'Pitahaya Pulpa Roja',   en:'Red Flesh Dragon Fruit',   color:'#E91E63' },
+  { id:'pitahaya_blanca', name:'Pitahaya Pulpa Blanca',  en:'White Flesh Dragon Fruit', color:'#FF5722' },
+  { id:'golden_yellow',   name:'Golden Yellow',          en:'Yellow Dragon Fruit',      color:'#FDD835' },
+  { id:'palora',          name:'Palora Amarilla',        en:'Palora Yellow Dragon Fruit',color:'#FF8F00' },
+  { id:'limon',           name:'Limón Tahití',           en:'Persian Lime',             color:'#7CB342' },
+  { id:'granadilla',      name:'Granadilla',             en:'Sweet Passion Fruit',      color:'#7B1FA2' },
+  { id:'pepino',          name:'Pepino Melón',           en:'Pepino Melon',             color:'#00897B' },
+  { id:'tomate',          name:'Tomate de Árbol',        en:'Tree Tomato / Tamarillo',  color:'#D84315' },
+];
+
+const DISPONIBILIDAD = ['Alta','Media','Baja'];
+
+let sb, currentUser;
+
+// ── LOGIN ─────────────────────────────────────────────────
+function doLogin() {
+  const pass = document.getElementById('loginPass').value.trim();
+  const user = USERS[pass];
+  if (!user) {
+    document.getElementById('loginError').style.display = 'block';
+    return;
+  }
+  currentUser = user;
+  sessionStorage.setItem('agrovip_user', user);
+  sessionStorage.setItem('agrovip_pass', pass);
+  showApp();
+}
+
+function logout() {
+  sessionStorage.clear();
+  location.reload();
+}
+
+function showApp() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('appWrap').style.display = 'block';
+  document.getElementById('navUser').textContent = `👤 ${currentUser}`;
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  emailjs.init(EMAILJS_KEY);
+  buildProductRows();
+  loadCurrentData();
+}
+
+// ── BUILD PRODUCT ROWS ───────────────────────────────────
+function buildProductRows() {
+  const wrap = document.getElementById('productRows');
+  wrap.innerHTML = PRODUCTS.map(p => `
+    <div class="product-row" style="border-color:${p.color};" id="row_${p.id}">
+      <div class="product-row-header">
+        <div class="product-dot" style="background:${p.color};"></div>
+        <h3>${p.name}</h3>
+        <span class="en">${p.en}</span>
+      </div>
+      <div class="row-fields">
+        <div class="field">
+          <label>FOB USD / Caja</label>
+          <input type="text" id="${p.id}_fob" placeholder="Ej: $11.50 – $14.00">
+          <div class="note">Include unidad: caja 10kg o 5kg</div>
+        </div>
+        <div class="field">
+          <label>Disponibilidad</label>
+          <select id="${p.id}_disp">
+            ${DISPONIBILIDAD.map(d=>`<option value="${d}">${d}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Notas (opcional)</label>
+          <input type="text" id="${p.id}_notas" placeholder="Ej: Temporada alta, stock limitado...">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── LOAD CURRENT DATA ────────────────────────────────────
+async function loadCurrentData() {
+  try {
+    const { data, error } = await sb
+      .from('precios_semana')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+
+    if (error || !data) { updateStatusBanner(null); return; }
+
+    // Fill header
+    document.getElementById('fSemana').value = data.semana || '';
+    document.getElementById('fFecha').value  = data.fecha  || '';
+    document.getElementById('fNota').value   = data.nota   || '';
+
+    // Fill products
+    const precios = data.precios || {};
+    PRODUCTS.forEach(p => {
+      const pd = precios[p.id] || {};
+      document.getElementById(`${p.id}_fob`).value   = pd.fob   || '';
+      document.getElementById(`${p.id}_disp`).value  = pd.disponibilidad || 'Alta';
+      document.getElementById(`${p.id}_notas`).value = pd.notas  || '';
+    });
+
+    updateStatusBanner(data.updated_at || data.created_at);
+  } catch(e) {
+    updateStatusBanner(null);
+  }
+}
+
+// ── STATUS BANNER ────────────────────────────────────────
+function updateStatusBanner(updatedAt) {
+  const banner = document.getElementById('statusBanner');
+  const text   = document.getElementById('statusText');
+
+  if (!updatedAt) {
+    banner.className = 'status-banner status-warn';
+    text.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> &nbsp;No hay precios cargados aún. Completa el formulario y guarda.';
+    return;
+  }
+
+  const lastUpdate = new Date(updatedAt);
+  const now        = new Date();
+  const daysDiff   = Math.floor((now - lastUpdate) / (1000*60*60*24));
+  const dateStr    = lastUpdate.toLocaleDateString('es-EC', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  if (daysDiff <= 7) {
+    banner.className = 'status-banner status-ok';
+    text.innerHTML = `✅ &nbsp;Última actualización: <strong>${dateStr}</strong> (hace ${daysDiff} día${daysDiff!==1?'s':''}). Precios al día.`;
+  } else {
+    banner.className = 'status-banner status-danger';
+    text.innerHTML = `⚠️ &nbsp;Última actualización: <strong>${dateStr}</strong> — Han pasado <strong>${daysDiff} días</strong>. ¡Actualizar precios esta semana!`;
+  }
+}
+
+// ── SAVE ─────────────────────────────────────────────────
+async function savePrecios() {
+  const btn = document.getElementById('btnSave');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+
+  // Collect data
+  const semana = document.getElementById('fSemana').value.trim();
+  const fecha  = document.getElementById('fFecha').value.trim();
+  const nota   = document.getElementById('fNota').value.trim();
+
+  if (!semana || !fecha) {
+    showToast('Completa el número de semana y el período.', true);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios';
+    return;
+  }
+
+  const precios = {};
+  PRODUCTS.forEach(p => {
+    precios[p.id] = {
+      producto:       p.name,
+      variedad:       p.en,
+      fob:            document.getElementById(`${p.id}_fob`).value.trim(),
+      disponibilidad: document.getElementById(`${p.id}_disp`).value,
+      notas:          document.getElementById(`${p.id}_notas`).value.trim(),
+    };
+  });
+
+  try {
+    // Upsert — always insert new row (keeps history)
+    const { error } = await sb.from('precios_semana').insert({
+      semana, fecha, nota, precios,
+      updated_by: currentUser,
+      updated_at: new Date().toISOString(),
+    });
+
+    if (error) throw error;
+
+    showToast('✅ Precios guardados y publicados exitosamente.');
+    updateStatusBanner(new Date().toISOString());
+
+  } catch(e) {
+    showToast('Error guardando: ' + e.message, true);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar y Publicar Precios';
+}
+
+// ── TOAST ────────────────────────────────────────────────
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.style.display = 'flex';
+  setTimeout(() => t.style.display = 'none', 4000);
+}
+
+// ── AUTO LOGIN si ya hay sesión ──────────────────────────
+window.onload = () => {
+  const saved = sessionStorage.getItem('agrovip_user');
+  if (saved) { currentUser = saved; showApp(); }
+};
+</script>
+</body>
+</html>
