@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!-- v1.1 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroVIP & PackVIP — Premium Exotic Fruits from Ecuador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* ── IMPORT SHARED (inline for GitHub Pages single-file) ── */
+    :root {
+      --green:#064E3B; --green-mid:#065F46; --green-light:#D1FAE5;
+      --gold:#F59E0B; --gold-light:#FEF3C7; --cream:#F8FAF4;
+      --dark:#1F2937; --gray:#6B7280; --white:#FFFFFF;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--dark);}
+
+    /* NAV */
+    nav{position:sticky;top:0;z-index:100;background:var(--green);height:68px;
+        display:flex;align-items:center;padding:0 40px;box-shadow:0 2px 16px rgba(0,0,0,.18);}
+    .nav-brand{font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;
+        color:#fff;letter-spacing:1px;text-decoration:none;margin-right:auto;}
+    .nav-brand span{color:var(--gold);}
+    .nav-links{display:flex;gap:6px;align-items:center;}
+    .nav-links a{color:#D1FAE5;text-decoration:none;font-size:14px;font-weight:600;
+        padding:8px 14px;border-radius:8px;transition:background .2s,color .2s;}
+    .nav-links a:hover,.nav-links a.active{background:rgba(255,255,255,.12);color:#fff;}
+    .nav-cta{background:var(--gold)!important;color:var(--green)!important;font-weight:700!important;margin-left:6px;}
+    .nav-cta:hover{background:#D97706!important;}
+
+    /* HERO */
+    .hero{
+      min-height: calc(100vh - 68px);
+      background: linear-gradient(135deg, rgba(6,78,59,.92) 0%, rgba(4,50,38,.97) 100%),
+                  url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=1400&q=80') center/cover;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;padding:60px 40px;
+    }
+    .hero-tag{
+      background:rgba(245,158,11,.2);border:1px solid var(--gold);
+      color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;
+      text-transform:uppercase;padding:6px 20px;border-radius:50px;margin-bottom:28px;
+    }
+    .hero h1{
+      font-family:'Poppins',sans-serif;font-size:clamp(42px,7vw,88px);
+      font-weight:800;color:#fff;line-height:1.05;margin-bottom:16px;
+    }
+    .hero h1 span{color:var(--gold);}
+    .hero-sub{font-size:clamp(16px,2.5vw,22px);color:#A7F3D0;
+        max-width:640px;line-height:1.6;margin-bottom:48px;font-weight:300;}
+    .hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;
+        border-radius:50px;font-family:'Poppins',sans-serif;font-weight:700;
+        font-size:15px;text-decoration:none;transition:transform .2s,box-shadow .2s;cursor:pointer;border:none;}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2);}
+    .btn-gold{background:var(--gold);color:var(--green);}
+    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.5);color:#fff;}
+    .btn-wa{background:#25D366;color:#fff;}
+
+    /* STATS STRIP */
+    .stats{background:var(--green-mid);padding:36px 40px;
+        display:flex;justify-content:center;gap:64px;flex-wrap:wrap;}
+    .stat{text-align:center;}
+    .stat-num{font-family:'Poppins',sans-serif;font-size:38px;font-weight:800;color:var(--gold);}
+    .stat-lbl{font-size:13px;color:#A7F3D0;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+    /* SECTIONS */
+    .section{padding:80px 40px;max-width:1200px;margin:0 auto;}
+    .section-title{font-family:'Poppins',sans-serif;font-size:36px;font-weight:800;
+        color:var(--green);border-left:6px solid var(--gold);padding-left:20px;margin-bottom:8px;}
+    .section-sub{font-size:17px;color:var(--gray);margin-left:26px;margin-bottom:48px;}
+
+    /* COMPANY CARDS */
+    .companies{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
+    .company-card{
+      background:#fff;border-radius:16px;overflow:hidden;
+      box-shadow:0 4px 24px rgba(6,78,59,.10);
+    }
+    .card-top{height:8px;}
+    .card-top.green{background:var(--green);}
+    .card-top.gold{background:var(--gold);}
+    .card-body{padding:36px;}
+    .card-icon{font-size:36px;margin-bottom:16px;}
+    .card-body h3{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;
+        color:var(--green);margin-bottom:8px;}
+    .card-body p{color:var(--gray);line-height:1.7;margin-bottom:20px;}
+    .card-pills{display:flex;flex-wrap:wrap;gap:8px;}
+    .pill{background:var(--green-light);color:var(--green);font-size:12px;
+        font-weight:700;padding:4px 12px;border-radius:50px;}
+    .pill.gold{background:var(--gold-light);color:#92400E;}
+
+    /* WHY AGROVIP */
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+    .why-card{background:#fff;border-radius:14px;padding:32px;
+        box-shadow:0 2px 12px rgba(6,78,59,.07);border-top:4px solid var(--gold);}
+    .why-card i{font-size:28px;color:var(--green);margin-bottom:16px;}
+    .why-card h4{font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;
+        color:var(--dark);margin-bottom:10px;}
+    .why-card p{color:var(--gray);font-size:15px;line-height:1.6;}
+
+    /* FRUIT PREVIEW */
+    .fruits-preview{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;}
+    .fruit-chip{
+      background:#fff;border-radius:12px;padding:20px 16px;text-align:center;
+      box-shadow:0 2px 12px rgba(6,78,59,.07);
+      transition:transform .2s,box-shadow .2s;
+      text-decoration:none;color:var(--dark);
+      border-top:4px solid;
+    }
+    .fruit-chip:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(6,78,59,.15);}
+    .fruit-chip .emoji{font-size:32px;margin-bottom:10px;}
+    .fruit-chip h4{font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;}
+    .fruit-chip p{font-size:12px;color:var(--gray);}
+
+    /* CTA BAND */
+    .cta-band{
+      background:linear-gradient(135deg, var(--green) 0%, #022C22 100%);
+      padding:72px 40px;text-align:center;margin-top:80px;
+    }
+    .cta-band h2{font-family:'Poppins',sans-serif;font-size:40px;font-weight:800;
+        color:#fff;margin-bottom:16px;}
+    .cta-band p{color:#A7F3D0;font-size:18px;margin-bottom:40px;}
+    .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+    /* FOOTER */
+    footer{background:var(--green);color:#A7F3D0;padding:48px 40px;
+        display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;}
+    footer h4{color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;
+        margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;}
+    footer p,footer a{font-size:13px;line-height:1.9;color:#A7F3D0;text-decoration:none;display:block;}
+    footer a:hover{color:var(--gold);}
+    .footer-bottom{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.1);
+        padding-top:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.35);}
+    .social-row{display:flex;gap:10px;margin-top:12px;}
+    .social-row a{display:inline-flex;align-items:center;justify-content:center;
+        width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);
+        color:#fff!important;font-size:15px;transition:background .2s;}
+    .social-row a:hover{background:var(--gold);}
+
+    /* FLOATING CONTACT */
+    .contact-bar{position:fixed;bottom:24px;right:24px;
+        display:flex;flex-direction:column;gap:10px;z-index:200;}
+    .contact-bar a{width:52px;height:52px;border-radius:50%;
+        display:flex;align-items:center;justify-content:center;
+        font-size:20px;color:#fff;text-decoration:none;
+        box-shadow:0 4px 16px rgba(0,0,0,.25);transition:transform .2s;}
+    .contact-bar a:hover{transform:scale(1.12);}
+    .cb-wa{background:#25D366;}
+    .cb-mail{background:var(--gold);}
+    .cb-li{background:#0A66C2;}
+
+    @media(max-width:768px){
+      nav{padding:0 16px;}
+      .companies,.why-grid,.fruits-preview{grid-template-columns:1fr;}
+      .fruits-preview{grid-template-columns:1fr 1fr;}
+      footer{grid-template-columns:1fr;}
+      .stats{gap:32px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="./index.html" class="nav-brand">AGRO<span>VIP</span></a>
+  <div class="nav-links">
+    <a href="./index.html" class="active">Home</a>
+    <a href="./productos.html">Products</a>
+    <a href="./precios.html">Weekly Prices</a>
+    <a href="./contacto.html" class="nav-cta"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag"><i class="fa-solid fa-seedling"></i> &nbsp;Ecuador · Farm to Container</div>
+  <h1>Fresh from <span>Ecuador</span><br>to Your Market</h1>
+  <p class="hero-sub">Premium exotic fruits — pitahaya, limón Tahití, granadilla and more —
+     grown, packed, and exported directly from Guayaquil.</p>
+  <div class="hero-btns">
+    <a href="./index.html" class="btn btn-gold"><i class="fa-solid fa-book-open"></i> Ver Catálogo Completo</a>
+    <a href="./precios.html" class="btn btn-outline"><i class="fa-solid fa-table-list"></i> Weekly FOB Prices</a>
+    <a href="./productos.html" class="btn btn-outline"><i class="fa-solid fa-boxes-stacked"></i> Our Products</a>
+    <a href="https://wa.me/593998945387?text=Hello%20AgroVIP%2C%20I%27m%20interested%20in%20importing%20your%20fruits." target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Premium Products</div></div>
+  <div class="stat"><div class="stat-num">34+</div><div class="stat-lbl">Certified Farmers</div></div>
+  <div class="stat"><div class="stat-num">30K</div><div class="stat-lbl">Boxes / Month</div></div>
+  <div class="stat"><div class="stat-num">$5.9M</div><div class="stat-lbl">Revenue 2025</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">US & EU Markets</div></div>
+</div>
+
+<!-- COMPANIES -->
+<div class="section">
+  <h2 class="section-title">Two Companies, One Supply Chain</h2>
+  <p class="section-sub">Integrated from field to reefer container.</p>
+  <div class="companies">
+    <div class="company-card">
+      <div class="card-top green"></div>
+      <div class="card-body">
+        <div class="card-icon">🌿</div>
+        <h3>AgroVIP S.A.</h3>
+        <p>Ecuador's premium exotic fruit exporter. We source directly from 34+ certified
+           producers, ensuring consistent quality and full traceability from farm to container.</p>
+        <div class="card-pills">
+          <span class="pill">Direct Export</span>
+          <span class="pill">GlobalGAP</span>
+          <span class="pill">BRCGS (in progress)</span>
+          <span class="pill">US & EU</span>
+        </div>
+      </div>
+    </div>
+    <div class="company-card">
+      <div class="card-top gold"></div>
+      <div class="card-body">
+        <div class="card-icon">📦</div>
+        <h3>PackVIP S.A.S.</h3>
+        <p>Our in-house packing plant in Guayaquil handles 30,000 boxes/month with full cold
+           chain management, retail-ready labeling, and co-packing services for third parties.</p>
+        <div class="card-pills">
+          <span class="pill gold">30K boxes/month</span>
+          <span class="pill gold">Cold Chain</span>
+          <span class="pill gold">Retail Ready</span>
+          <span class="pill gold">Maquila / Co-pack</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRUIT PREVIEW -->
+<div class="section" style="padding-top:0;">
+  <h2 class="section-title">Our Products</h2>
+  <p class="section-sub">8 premium fruits, year-round supply.</p>
+  <div class="fruits-preview">
+    <a href="productos.html#pitahaya-roja" class="fruit-chip" style="border-color:#E91E63;">
+      <div class="emoji">🔴</div><h4>Pitahaya Roja</h4><p>Red Flesh Dragon Fruit</p>
+    </a>
+    <a href="productos.html#pitahaya-blanca" class="fruit-chip" style="border-color:#FF5722;">
+      <div class="emoji">🐉</div><h4>Pitahaya Blanca</h4><p>White Flesh Dragon Fruit</p>
+    </a>
+    <a href="productos.html#golden-yellow" class="fruit-chip" style="border-color:#FDD835;">
+      <div class="emoji">💛</div><h4>Golden Yellow</h4><p>Yellow Dragon Fruit</p>
+    </a>
+    <a href="productos.html#palora" class="fruit-chip" style="border-color:#FF8F00;">
+      <div class="emoji">🌟</div><h4>Palora Amarilla</h4><p>Exclusive Ecuadorian variety</p>
+    </a>
+    <a href="productos.html#limon" class="fruit-chip" style="border-color:#7CB342;">
+      <div class="emoji">🍋</div><h4>Limón Tahití</h4><p>Persian Lime · Cal. 42–60</p>
+    </a>
+    <a href="productos.html#granadilla" class="fruit-chip" style="border-color:#7B1FA2;">
+      <div class="emoji">🟣</div><h4>Granadilla</h4><p>Sweet Passion Fruit</p>
+    </a>
+    <a href="productos.html#pepino" class="fruit-chip" style="border-color:#00897B;">
+      <div class="emoji">🫐</div><h4>Pepino Melón</h4><p>Andean Pepino Melon</p>
+    </a>
+    <a href="productos.html#tomate" class="fruit-chip" style="border-color:#D84315;">
+      <div class="emoji">🍅</div><h4>Tomate de Árbol</h4><p>Tree Tomato / Tamarillo</p>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    <a href="./productos.html" class="btn btn-green"><i class="fa-solid fa-arrow-right"></i> View Full Product Specs</a>
+  </div>
+</div>
+
+<!-- WHY -->
+<div style="background:#fff;padding:80px 0;">
+  <div class="section" style="padding-top:0;padding-bottom:0;">
+    <h2 class="section-title">Why AgroVIP</h2>
+    <p class="section-sub">What makes us different.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <i class="fa-solid fa-layer-group"></i>
+        <h4>Vertical Integration</h4>
+        <p>We own the packing plant. From our farmers to your reefer container — one team, full control, zero surprises.</p>
+      </div>
+      <div class="why-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h4>Certified Quality</h4>
+        <p>GlobalGAP certified, BRCGS in progress. Strict cold chain protocol and real-time quality dashboards.</p>
+      </div>
+      <div class="why-card">
+        <i class="fa-solid fa-handshake"></i>
+        <h4>Reliable Partner</h4>
+        <p>Direct exporter since 2015. Active clients in Miami, Los Angeles, and Europe. Dedicated account management.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>Ready to Source from Ecuador?</h2>
+  <p>Get our weekly FOB prices every Thursday — or reach us directly.</p>
+  <div class="cta-btns">
+    <a href="./precios.html" class="btn btn-gold"><i class="fa-solid fa-table-list"></i> See This Week's Prices</a>
+    <a href="mailto:ventas@agrovipsas.com?subject=Product%20Inquiry%20%E2%80%94%20AgroVIP&body=Hello%2C%20I%20am%20interested%20in%20importing%20fruit%20from%20AgroVIP.%20Please%20send%20me%20more%20information." class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Send Email</a>
+    <a href="https://wa.me/593998945387?text=Hello%20AgroVIP%2C%20I%27d%20like%20to%20request%20a%20quote." target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <h4>AgroVIP & PackVIP</h4>
+    <p>Premium exotic fruit exporters.<br>Guayaquil, Ecuador.</p>
+    <div class="social-row">
+      <a href="https://www.linkedin.com/company/agrovip" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://wa.me/593998945387" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="mailto:ventas@agrovipsas.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+  </div>
+  <div>
+    <h4>Navigation</h4>
+    <a href="./index.html">Home</a>
+    <a href="./productos.html">Products</a>
+    <a href="./precios.html">Weekly Prices</a>
+    <a href="./contacto.html">Contact</a>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <a href="mailto:ventas@agrovipsas.com">ventas@agrovipsas.com</a>
+    <a href="https://wa.me/593998945387">+593 998 945 387</a>
+    <a href="https://www.agrovipsas.com">www.agrovipsas.com</a>
+    <p style="margin-top:8px;">Guayaquil · Ecuador</p>
+  </div>
+  <div class="footer-bottom">© 2025 AgroVIP S.A. & PackVIP S.A.S. — All rights reserved.</div>
+</footer>
+
+<!-- FLOATING CONTACT BAR -->
+<div class="contact-bar">
+  <a href="https://wa.me/593998945387?text=Hello%20AgroVIP!" target="_blank" class="cb-wa" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="mailto:ventas@agrovipsas.com?subject=Inquiry%20AgroVIP" class="cb-mail" title="Email"><i class="fa-solid fa-envelope"></i></a>
+  <a href="https://www.linkedin.com/company/agrovip" target="_blank" class="cb-li" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+
+</body>
+</html>
